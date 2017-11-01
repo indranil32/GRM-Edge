@@ -1,0 +1,39 @@
+{
+   "kind":"Service",
+   "apiVersion":"v1",
+   "metadata":{
+      "name":"com-att-scld-grmedge-svc",
+      "namespace":"default",
+      "creationTimestamp":null
+   },
+   "spec":{
+      "ports":[
+         {
+            "name":"grmedge-port",
+            "protocol":"TCP",
+            "port":80,
+            "targetPort":8080
+         },
+        {
+            "name":"hazelcast-port",
+            "protocol":"TCP",
+            "port":31999,
+            "targetPort":31999,
+            "nodePort":31999
+         }
+      ],
+      "selector":{
+         "app":"com-att-scld-grmedge",
+                 "version":"1.0.0",
+                 "dme-namespace":"com.att.scld",
+                "routeoffer":"TEST"
+      },
+      "type":"LoadBalancer",
+      "sessionAffinity":"None"
+   },
+   "status":{
+      "loadBalancer":{
+
+      }
+   }
+}

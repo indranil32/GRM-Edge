@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: com-att-scld-grmedge-rc
+spec:
+  replicas: 0
+  selector:
+    app: com-att-scld-grmedge
+  template:
+    metadata:
+      labels:
+        app: com-att-scld-grmedge
+        version: 1.0.0
+        routeoffer: TEST
+        dme-namespace: com.att.scld
+    spec:
+      containers:
+      - name: grmedge
+        image: 
+        imagePullPolicy: Always
+        lifecycle:
+          preStop:
+            exec:
+              command:
+              - /bin/bash
+              - /shutdownhook.sh
+        ports:
+        - containerPort: 8080
+          name: grmedge-port
+        - containerPort: 31999
+          name: hazelcast-port
+        volumeMounts:
+        - mountPath: /grmedge-config
+          name: config
+      volumes:
+        - name: config
+          configMap:
+            name: grmedge-config
+            items:
+            - key: grmedgeprops.properties
+              path: grmedgeprops.properties

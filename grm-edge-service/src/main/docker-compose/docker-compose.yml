@@ -1,0 +1,27 @@
+version: '2'
+services:
+  grm_container:
+    image: ad681s/grm-updated
+    ports:
+      - "8080:8080"
+      - "31999:31999"
+
+    links:
+      - cassandra_container
+    volumes:
+      - ./wait_for_host_port.sh:/tmp/wait_for_host_port.sh
+    entrypoint: ["bash", "-c", "/tmp/wait_for_host_port.sh cassandra_container 9042; sleep 20; /bin/sh -c ./startService.sh"]
+    environment:
+      - CASSANDRA_CLUSTER=cassandra_container
+    
+  cassandra_container:
+    image: cassandra:2.1.16
+    ports:
+      - "7000:7000"
+      - "7001:7001"
+      - "9042:9042"
+      - "9160:9160"
+    volumes:
+      - ./data:/data
+      - ./wait_for_host_port.sh:/tmp/wait_for_host_port.sh
+    entrypoint: ["bash", "-c", "(/tmp/wait_for_host_port.sh localhost 9042 cqlsh --file /data/service_topology_schema.cql -u cassandra -p cassandra localhost;) & (/docker-entrypoint.sh cassandra -f)"]

@@ -1,0 +1,27 @@
+<!--
+    Copyright (c) 2017 AT&T Intellectual Property. All rights reserved.
+ -->
+<hazelcast xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.hazelcast.com/schema/config http://www.hazelcast.com/schema/config/hazelcast-config-3.5.xsd" xmlns="http://www.hazelcast.com/schema/config">
+<network>
+<port auto-increment="true">31999</port>
+<join>
+<multicast enabled="false"></multicast>
+<tcp-ip enabled="true"></tcp-ip>
+</join>
+<ssl enabled="false" />
+<socket-interceptor enabled="false" />
+</network>
+<map name="default">
+<backup-count>0</backup-count>
+<time-to-live-seconds>0</time-to-live-seconds>
+<max-idle-seconds>0</max-idle-seconds>
+<eviction-policy>NONE</eviction-policy>
+<eviction-percentage>25</eviction-percentage>
+<merge-policy>hz.ADD_NEW_ENTRY</merge-policy>
+<map-store enabled="true">
+<factory-class-name>com.att.ocnp.mgmt.grm_edge_service.mapstore.EdgeMapStoreFactory
+</factory-class-name>
+<write-delay-seconds>1</write-delay-seconds>
+</map-store>
+</map>
+</hazelcast>

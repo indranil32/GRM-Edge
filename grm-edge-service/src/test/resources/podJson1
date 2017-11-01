@@ -1,0 +1,150 @@
+{
+	"type": "ADDED",
+	"object": {
+		"kind": "Pod",
+		"apiVersion": "v1",
+		"metadata": {
+			"name": "<REPLACE_NAME>",
+			"generateName": "ajsc6test4-rc-",
+			"namespace": "<NAMESPACE>",
+			"selfLink": "/api/v1/namespaces/<NAMESPACE>/pods/ajsc6test4-rc-e2e99",
+			"uid": "fe254605-2f32-11e6-be98-0ac2449f3bed",
+			"resourceVersion": "3653717",
+			"creationTimestamp": "2016-06-10T17:44:34Z",
+			"labels": {
+				"app": "<REPLACE_NAME>",
+		         "version":"1.0.0",
+				 "routeoffer":"TEST"         		
+			},
+			"annotations": {
+				"kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicationController\",\"namespace\":\"<NAMESPACE>\",\"name\":\"ajsc6test4-rc\",\"uid\":\"fd88ff44-2f32-11e6-be98-0ac2449f3bed\",\"apiVersion\":\"v1\",\"resourceVersion\":\"3653527\"}}\n"
+			}
+		},
+		"spec": {
+			"volumes": [{
+				"name": "default-token-zc8xy",
+				"secret": {
+					"secretName": "default-token-zc8xy"
+				}
+			}],
+			"containers": [{
+				"name": "ajsc6test4",
+				"image": "10.223.13.203:5000/ajsc6test4:latest",
+				"ports": [{
+					"containerPort": 8080,
+					"protocol": "TCP"
+				}],
+				"env": [{
+					"name": "APPDYNAMICS_CONTROLLER_HOST_NAME",
+					"valueFrom": {
+						"secretKeyRef": {
+							"name": "appdynamicsconfig",
+							"key": "host"
+						}
+					}
+				},
+				{
+					"name": "APPDYNAMICS_CONTROLLER_SSL_ENABLED",
+					"valueFrom": {
+						"secretKeyRef": {
+							"name": "appdynamicsconfig",
+							"key": "ssl"
+						}
+					}
+				},
+				{
+					"name": "APPDYNAMICS_CONTROLLER_PORT",
+					"valueFrom": {
+						"secretKeyRef": {
+							"name": "appdynamicsconfig",
+							"key": "port"
+						}
+					}
+				},
+				{
+					"name": "APPDYNAMICS_AGENT_APPLICATION_NAME",
+					"valueFrom": {
+						"secretKeyRef": {
+							"name": "appdynamicsconfig",
+							"key": "appname"
+						}
+					}
+				},
+				{
+					"name": "APPDYNAMICS_AGENT_ACCOUNT_NAME",
+					"valueFrom": {
+						"secretKeyRef": {
+							"name": "appdynamicsconfig",
+							"key": "account"
+						}
+					}
+				},
+				{
+					"name": "APPDYNAMICS_AGENT_ACCOUNT_ACCESS_KEY",
+					"valueFrom": {
+						"secretKeyRef": {
+							"name": "appdynamicsconfig",
+							"key": "key"
+						}
+					}
+				},
+				{
+					"name": "KUBE_ID",
+					"valueFrom": {
+						"secretKeyRef": {
+							"name": "appdynamicsconfig",
+							"key": "kubeid"
+						}
+					}
+				}],
+				"resources": {
+					
+				},
+				"volumeMounts": [{
+					"name": "default-token-zc8xy",
+					"readOnly": true,
+					"mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+				}],
+				"terminationMessagePath": "/dev/termination-log",
+				"imagePullPolicy": "Always"
+			}],
+			"restartPolicy": "Always",
+			"terminationGracePeriodSeconds": 30,
+			"dnsPolicy": "ClusterFirst",
+			"serviceAccountName": "default",
+			"serviceAccount": "default",
+			"nodeName": "10.223.10.135",
+			"securityContext": {
+				
+			}
+		},
+		"status": {
+			"phase": "Running",
+			"conditions": [{
+				"type": "Ready",
+				"status": "True",
+				"lastProbeTime": null,
+				"lastTransitionTime": "2016-06-10T17:45:17Z"
+			}],
+			"hostIP": "10.223.10.135",
+			"podIP": "10.233.72.9",
+			"startTime": "2016-06-10T17:44:25Z",
+			"containerStatuses": [{
+				"name": "ajsc6test4",
+				"state": {
+					"running": {
+						"startedAt": "2016-06-10T17:45:16Z"
+					}
+				},
+				"lastState": {
+					
+				},
+				"ready": true,
+				"restartCount": 0,
+				"image": "10.223.13.203:5000/ajsc6test4:latest",
+				"imageID": "image_2",
+				"containerID": "container_2"
+			}]
+		}
+	}
+}

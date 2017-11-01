@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+    Copyright (c) 2017 AT&T Intellectual Property. All rights reserved.
+ -->
+
+<ns2:CacheTypes xmlns:ns2="CacheTypes" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="CacheTypes.xsd">
+	<CacheType name="grmservice_serviceendpoint_cache">
+		<element_ttl>300000</element_ttl>
+		<refresh_interval>20000</refresh_interval>
+		<failed_refresh_retry_ttls>5000</failed_refresh_retry_ttls>		
+		<cache_command_class>com.att.scld.edgecore.cache.command.EndpointCommand</cache_command_class>
+	</CacheType>
+	<CacheType name="req_resp_cache">
+		<element_ttl>300000</element_ttl>
+		<refresh_interval>20000</refresh_interval>
+		<failed_refresh_retry_ttls>5000</failed_refresh_retry_ttls>
+	</CacheType>
+</ns2:CacheTypes>

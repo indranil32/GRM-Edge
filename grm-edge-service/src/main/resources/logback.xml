@@ -1,0 +1,28 @@
+<!--
+    Copyright (c) 2017 AT&T Intellectual Property. All rights reserved.
+ -->
+<configuration>
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <!-- encoders are assigned the type
+         ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+    <encoder>
+      <Pattern>%date{"yyyy-MM-dd'T'HH:mm:ss.SSSZ", GMT}|%level|%thread|%class|%M|%X{TrackingID}|%m%n%ex{full}</Pattern>
+    </encoder>
+  </appender>
+  
+  <logger name="org.hibernate" level="WARN"/>
+  <logger name="com.att.ocnp.mgmt" level="TRACE"/>
+  <logger name="com.aeg" level="DEBUG"/>
+  <logger name="org.apache" level="WARN"/>
+  <logger name="com.opensymphony.xwork2" level="WARN"/>
+  <logger name="com.squareup" level="WARN"/>
+  <logger name="org.glassfish" level="INFO"/>
+  <logger name="org.glassfish.jersey" level="INFO"/>
+  <logger name="org.springframework.boot.context.embedded.tomcat" level="INFO"/>
+  <logger name="com.hazelcast" level="INFO"/>
+
+  <root level="WARN">
+    <appender-ref ref="STDOUT" />
+  </root>
+</configuration>

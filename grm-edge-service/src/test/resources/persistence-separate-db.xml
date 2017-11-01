@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright (c) 2017 AT&T Intellectual Property. All rights reserved.
+ -->
+
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+	<persistence-unit name="grm_topology">
+        <class>com.att.aft.edge.topology.domain.ServiceEndPoint</class>
+        <class>com.att.aft.edge.topology.domain.ServiceDefinition</class>
+        <class>com.att.aft.edge.topology.domain.ServiceVersionDefinition</class>        
+		<properties>
+			<property name="Host" value="dummyvalues.com" />
+			<property name="Port" value="20004" />
+			<property name="Cluster" value="aws_cluster" />
+			<property name="Keyspace" value="topology" />
+			<property name="Username" value="root" />
+			<property name="Password" value="password" />
+			<property name="ReadConsistency" value="ONE" />
+			<property name="WriteConsistency" value="QUORUM" />
+			<property name="ForceColumnFamilyCreation" value="true" />
+			<property name="DisableJMX" value="false" />
+			<property name="DisableMetrics" value="false" />
+			<property name="SSLEnabled" value="false" />
+            <property name="keyspaceAutoCreateEnabled" value="true"/>
+            <property name="thiftApiClientPort" value="9160"/>
+            <property name="LoadBalancingPolicy" value="ROUND_ROBIN"/>
+		</properties>
+	</persistence-unit>
+	
+      
+
+</persistence>
