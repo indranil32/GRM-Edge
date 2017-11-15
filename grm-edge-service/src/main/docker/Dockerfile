@@ -1,5 +1,6 @@
 FROM anapsix/alpine-java:latest
 VOLUME /tmp
+RUN apk -U add curl
 ENV APPDYNAMICS_AGENT_TIER_NAME=grm-edge-service
 ADD grm-edge-service-1.1.18.jar /app.jar
 ADD startService.sh /startService.sh

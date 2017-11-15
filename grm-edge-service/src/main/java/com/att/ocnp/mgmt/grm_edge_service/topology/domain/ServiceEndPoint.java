@@ -10,14 +10,17 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.data.cassandra.mapping.Column;
 import org.springframework.data.cassandra.mapping.PrimaryKey;
 import org.springframework.data.cassandra.mapping.Table;
-import javax.xml.datatype.XMLGregorianCalendar;
+
+import javax.persistence.Entity;
+import javax.persistence.PersistenceUnit;
+import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
 
 import com.att.ocnp.mgmt.grm_edge_service.util.GRMEdgeUtil;
 import com.att.scld.grm.types.v1.Status;
-
-
+@Entity
+@PersistenceUnit(name = "grm_topology")
 @Table("serviceendpoint")
 public class ServiceEndPoint implements Serializable {
 	@Transient
@@ -51,10 +54,10 @@ public class ServiceEndPoint implements Serializable {
     protected String longitude;
     
     @Column("registrationtime")
-    protected XMLGregorianCalendar registrationTime;
+    protected Date registrationTime;
     
     @Column("expirationtime")
-    protected XMLGregorianCalendar expirationTime;
+    protected Date expirationTime;
     
     @Column("clientsupportedversions")
     protected String clientSupportedVersions;
@@ -86,8 +89,8 @@ public class ServiceEndPoint implements Serializable {
     protected String statusReasonCode;
     @Column("statusreasondescription ")
     protected String statusReasonDescription;
-*/    @Column("statuschecktime ")
-    protected XMLGregorianCalendar statusCheckTime;
+*/    @Column("statuschecktime")
+    protected Date statusCheckTime;
 
     @Column("eventcheckstatus")
     protected Status eventCheckStatus;
@@ -96,7 +99,7 @@ public class ServiceEndPoint implements Serializable {
     @Column("eventcheckmessage")
     protected String eventCheckMessage;
     @Column("eventcheckTime")
-    protected XMLGregorianCalendar eventCheckTime ;
+    protected Date eventCheckTime ;
     
     @Column("patchversion")    
     protected String patchVersion;
@@ -131,11 +134,11 @@ public class ServiceEndPoint implements Serializable {
     @Column("createdby")
     String createdBy;
     @Column("createdtimestamp")
-    protected XMLGregorianCalendar createdTimestamp;
+    protected Date createdTimestamp;
     @Column("updatedby")
     String updatedBy;
-    @Column("updatedtimestamp ")
-    protected XMLGregorianCalendar updatedTimestamp ;
+    @Column("updatedtimestamp")
+    protected Date updatedTimestamp ;
 
     
     @Column("deletetime")
@@ -224,22 +227,22 @@ public class ServiceEndPoint implements Serializable {
 	}
 
 
-	public XMLGregorianCalendar getRegistrationTime() {
+	public Date getRegistrationTime() {
 		return registrationTime;
 	}
 
 
-	public void setRegistrationTime(XMLGregorianCalendar registrationTime) {
+	public void setRegistrationTime(Date registrationTime) {
 		this.registrationTime = registrationTime;
 	}
 
 
-	public XMLGregorianCalendar getExpirationTime() {
+	public Date getExpirationTime() {
 		return expirationTime;
 	}
 
 
-	public void setExpirationTime(XMLGregorianCalendar expirationTime) {
+	public void setExpirationTime(Date expirationTime) {
 		this.expirationTime = expirationTime;
 	}
 
@@ -324,12 +327,12 @@ public class ServiceEndPoint implements Serializable {
 	}
 
 
-	public XMLGregorianCalendar getEventCheckTime() {
+	public Date getEventCheckTime() {
 		return eventCheckTime;
 	}
 
 
-	public void setEventcheckTime(XMLGregorianCalendar eventCheckTime) {
+	public void setEventcheckTime(Date eventCheckTime) {
 		this.eventCheckTime = eventCheckTime;
 	}
 
@@ -463,12 +466,12 @@ public class ServiceEndPoint implements Serializable {
 	}
 
 
-	public XMLGregorianCalendar getCreatedTimestamp() {
+	public Date getCreatedTimestamp() {
 		return createdTimestamp;
 	}
 
 
-	public void setCreatedTimestamp(XMLGregorianCalendar createdTimestamp) {
+	public void setCreatedTimestamp(Date createdTimestamp) {
 		this.createdTimestamp = createdTimestamp;
 	}
 
@@ -483,12 +486,12 @@ public class ServiceEndPoint implements Serializable {
 	}
 
 
-	public XMLGregorianCalendar getUpdatedTimestamp() {
+	public Date getUpdatedTimestamp() {
 		return updatedTimestamp;
 	}
 
 
-	public void setUpdatedTimestamp(XMLGregorianCalendar updatedTimestamp) {
+	public void setUpdatedTimestamp(Date updatedTimestamp) {
 		this.updatedTimestamp = updatedTimestamp;
 	}
 
@@ -523,12 +526,12 @@ public class ServiceEndPoint implements Serializable {
 	}
 
 */
-	public XMLGregorianCalendar getStatusCheckTime() {
+	public Date getStatusCheckTime() {
 		return statusCheckTime;
 	}
 
 
-	public void setStatusCheckTime(XMLGregorianCalendar statusCheckTime) {
+	public void setStatusCheckTime(Date statusCheckTime) {
 		this.statusCheckTime = statusCheckTime;
 	}
 

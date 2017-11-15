@@ -111,7 +111,7 @@ public class DataAccessManager {
         if(updateLease){
             Calendar now = Calendar.getInstance(GRMEdgeConstants.getTimeZone(), GRMEdgeConstants.getLocale());
             now.add(Calendar.MINUTE, SEP_EXPIRATION_INTERVAL_MINS_VAL);
-            sepExt.setExpirationTime(DateUtil.toXMLCalendar(now.getTime()));
+           sepExt.setExpirationTime(new Date()); 
         }
 
         dbManager.updateServiceEndPoint(sepExt, exisSepExt);
@@ -152,13 +152,13 @@ public class DataAccessManager {
 
         //This should already be set and never be entered
         if (serviceEp.getCreatedTimestamp() == null) {
-        	serviceEp.setCreatedTimestamp(DateUtil.toXMLCalendar());
+        	serviceEp.setCreatedTimestamp(new Date());// 
         }
         
 
         //This should already be set and never be entered
         if (serviceEp.getRegistrationTime() == null) {
-            serviceEp.setRegistrationTime(serviceEp.getCreatedTimestamp());
+            serviceEp.setRegistrationTime(serviceEp.getCreatedTimestamp()); 
         }
         
         //This should already be set and never be entered
@@ -172,11 +172,9 @@ public class DataAccessManager {
 				cal.set(Calendar.DATE, 9);
 				cal.set(Calendar.YEAR, 9999);
 				myDate = cal.getTime();
-				c2.setTime(myDate);
-				XMLGregorianCalendar date2;
-				date2 = DatatypeFactory.newInstance().newXMLGregorianCalendar(c2);
-				serviceEp.setExpirationTime(date2);
-			} catch (DatatypeConfigurationException e) {
+			
+				serviceEp.setExpirationTime(myDate);
+			} catch (Exception e) {
 				//ignore this block shouldn't even occur
 			}
         }
@@ -184,15 +182,15 @@ public class DataAccessManager {
         if (serviceEp.getStatus() == null) {
             // when adding a service end point, if status is null, initialize to RUNNING.
             serviceEp.setStatus(Status.RUNNING);
-            serviceEp.setStatusCheckTime(DateUtil.toXMLCalendar());
+           serviceEp.setStatusCheckTime(new Date());
         }
 
         if ((serviceEp.getStatus() != null) && (serviceEp.getStatusCheckTime() == null)) {
-            serviceEp.setStatusCheckTime(DateUtil.toXMLCalendar());
+            serviceEp.setStatusCheckTime(new Date()); 
         }
 
         if ((serviceEp.getEventCheckStatus() != null) && (serviceEp.getEventCheckTime() == null)) {
-            serviceEp.setEventcheckTime(DateUtil.toXMLCalendar());
+            serviceEp.setEventcheckTime(new Date()); 
         }
 
         dbManager.addServiceEndPoint(serviceEp);
@@ -207,13 +205,12 @@ public class DataAccessManager {
                     "addServiceDefintion", "ServiceDefinition", serviceDef.getServiceDefinitionId());
         } 
 
-        serviceDef.setCreatedTimestamp(DateUtil.toXMLCalendar());
+        serviceDef.setCreatedTimestamp(new Date()); 
         serviceDef.setCreatedBy("edge");
         
         dbManager.addServiceDefinition(serviceDef);
     }
 
-    //have to change this. cj9125 - What do we have to change? I don't see anything
     public void checkNAddServiceDefintion(ServiceDefinition inServiceDef) {
 		logger.trace("start with parameter: {}" , inServiceDef);    	    	
         ServiceDefinition sd = getServiceDefinition(inServiceDef.getServiceDefinitionId());
@@ -255,7 +252,7 @@ public class DataAccessManager {
             throw new EdgeException(GRMEdgeConstants.ADD_ALREADY_EXISTS, GRMEdgeConstants.ADD_ALREADY_EXISTS_ERR_MSG,
                     "addServiceVersionDefintion", "ServiceVersionDefinition", inSVD.getServiceVersionDefinitionId());
         }
-        inSVD.setCreatedTimestamp(DateUtil.toXMLCalendar());
+        inSVD.setCreatedTimestamp(new Date());
         inSVD.setCreatedBy("edge");
 
         dbManager.addServiceVersionDefinition(inSVD);

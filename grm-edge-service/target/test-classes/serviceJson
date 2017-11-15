@@ -1,0 +1,37 @@
+{
+	"type": "ADDED",
+	"object": {
+		"kind": "Service",
+		"apiVersion": "v1",
+		"metadata": {
+		    "name": "<REPLACE_NAME>",
+			"namespace": "<NAMESPACE>",
+			"selfLink": "/api/v1/namespaces/<NAMESPACE>/services/ajsc6test4-svc",
+			"uid": "e23a6f02-2f32-11e6-be98-0ac2449f3bed",
+			"resourceVersion": "3653460",
+			"creationTimestamp": "2016-06-10T17:43:47Z"
+		},
+		"spec": {
+			"ports": [{
+				"name": "<PORT_NAME>",
+				"protocol": "TCP",
+				"port": 80,
+				"targetPort": 8080,
+				"nodePort": 31054
+			}],
+			"selector": {
+				"app": "<REPLACE_NAME>",
+				"version": "1.0.0",
+				"routeoffer":"TEST"
+			},
+			"clusterIP": "10.233.61.246",
+			"type": "LoadBalancer",
+			"sessionAffinity": "None"
+		},
+		"status": {
+			"loadBalancer": {
+				
+			}
+		}
+	}
+}

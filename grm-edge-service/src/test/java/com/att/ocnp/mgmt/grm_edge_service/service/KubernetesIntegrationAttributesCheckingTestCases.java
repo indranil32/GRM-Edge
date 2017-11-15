@@ -53,10 +53,7 @@ public class KubernetesIntegrationAttributesCheckingTestCases {
 		System.setProperty("javax.net.ssl.trustStore", "src\\test\\resources\\cacerts");
 		GRMEdgeTestUtil.SSLCertificateValidation.disable();
 
-//		System.setProperty("KUBE_API_USER", "root");
-//		System.setProperty("KUBE_API_PWD", "password");
-//		System.setProperty("CHECK_GRM","true");		
-//		System.setProperty("KUBE_API_GRM_NAMESPACE", "name-space-DEV");
+
 	}
 	
 	/*

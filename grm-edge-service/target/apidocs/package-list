@@ -1,0 +1,14 @@
+com.att.ocnp.mgmt.grm_edge_service
+com.att.ocnp.mgmt.grm_edge_service.APIServerWatcher
+com.att.ocnp.mgmt.grm_edge_service.businessprocess
+com.att.ocnp.mgmt.grm_edge_service.cache
+com.att.ocnp.mgmt.grm_edge_service.common
+com.att.ocnp.mgmt.grm_edge_service.exception
+com.att.ocnp.mgmt.grm_edge_service.mapstore
+com.att.ocnp.mgmt.grm_edge_service.model
+com.att.ocnp.mgmt.grm_edge_service.service
+com.att.ocnp.mgmt.grm_edge_service.service.rs
+com.att.ocnp.mgmt.grm_edge_service.topology.data
+com.att.ocnp.mgmt.grm_edge_service.topology.domain
+com.att.ocnp.mgmt.grm_edge_service.types
+com.att.ocnp.mgmt.grm_edge_service.util

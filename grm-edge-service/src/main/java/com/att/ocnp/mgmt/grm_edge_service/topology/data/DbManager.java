@@ -5,6 +5,7 @@ package com.att.ocnp.mgmt.grm_edge_service.topology.data;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -153,8 +154,8 @@ public class DbManager {
 	public void addServiceEndPoint(ServiceEndPoint sepExt) {
 		try {
 			long startTime = System.currentTimeMillis();
-			InputDataValidator.validateResourceName(sepExt.getName());
-			InputDataValidator.validateSEPFields(sepExt);
+//			InputDataValidator.validateResourceName(sepExt.getName());
+//			InputDataValidator.validateSEPFields(sepExt);
 			logger.trace("addServiceEndPoint sepExt : {}", sepExt);
 
 			edgeDao.addServiceEndPoint(sepExt);
@@ -261,7 +262,7 @@ public class DbManager {
 			if ((sepExt.getStatusCheckTime() != null)) {
 				sep.setStatusCheckTime(sepExt.getStatusCheckTime());
 			} else {
-				sep.setStatusCheckTime(DateUtil.toXMLCalendar());
+				sep.setStatusCheckTime(new Date());          
 			}
 
 			if ((sepExt.getEventCheckStatusCode() != null)
@@ -288,8 +289,7 @@ public class DbManager {
 			if ((sepExt.getEventCheckTime() != null)) {
 				sep.setEventcheckTime(sepExt.getEventCheckTime());
 			} else {
-				sep.setEventcheckTime(DatatypeFactory.newInstance()
-						.newXMLGregorianCalendar((GregorianCalendar) GregorianCalendar.getInstance()));
+				sep.setEventcheckTime(new Date());                
 			}
 
 			if ((sepExt.getDme2JDBCDatabaseName() != null)
@@ -336,7 +336,7 @@ public class DbManager {
 			if (sepExt.getUpdatedTimestamp() != null) {
 				sep.setUpdatedTimestamp(sepExt.getUpdatedTimestamp());
 			} else {
-				sep.setUpdatedTimestamp(DateUtil.toXMLCalendar());
+				sep.setUpdatedTimestamp(new Date());
 			}
 			logger.trace("updateServiceEndPoint sep : {}", sep);
 

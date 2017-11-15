@@ -1,0 +1,15 @@
+com\att\ocnp\mgmt\grm_edge_service\service\GRMEdgeFullTestSuite.class
+com\att\ocnp\mgmt\grm_edge_service\service\GRMEdgeTestConstants.class
+com\att\ocnp\mgmt\grm_edge_service\service\GRMEdgeTestUtil$SSLCertificateValidation.class
+com\att\ocnp\mgmt\grm_edge_service\service\GRMEdgeTestUtil$SSLCertificateValidation$NullHostnameVerifier.class
+com\att\ocnp\mgmt\grm_edge_service\service\KubernetesIntegrationTestCases.class
+com\att\ocnp\mgmt\grm_edge_service\service\ConfigUtil.class
+com\att\ocnp\mgmt\grm_edge_service\service\CheckCassandraWithDBAndGRMEnableUtil.class
+com\att\ocnp\mgmt\grm_edge_service\service\GRMEdgeTestUtil$SSLCertificateValidation$NullX509TrustManager.class
+com\att\ocnp\mgmt\grm_edge_service\service\GRMEdgeUnitTests.class
+com\att\ocnp\mgmt\grm_edge_service\service\GRMEdgeTestUtil.class
+com\att\ocnp\mgmt\grm_edge_service\service\TrustAllHostNameVerifier.class
+com\att\ocnp\mgmt\grm_edge_service\service\CheckCassandraUtil.class
+com\att\ocnp\mgmt\grm_edge_service\service\GRMEdgeTestUtil$1.class
+com\att\ocnp\mgmt\grm_edge_service\service\KubernetesIntegrationAttributesCheckingTestCases$1.class
+com\att\ocnp\mgmt\grm_edge_service\service\KubernetesIntegrationAttributesCheckingTestCases.class

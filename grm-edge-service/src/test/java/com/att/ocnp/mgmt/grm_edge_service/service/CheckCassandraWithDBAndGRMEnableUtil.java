@@ -8,7 +8,7 @@ import com.datastax.driver.core.*;
 import java.util.*;
 
 public class CheckCassandraWithDBAndGRMEnableUtil {
-    static String[] CONTACT_POINTS = {"dummy.com"};
+    static String[] CONTACT_POINTS = {"your.cassandrainstance.com"}; // To test cluster connectivity, provide parameters accordingly
 
 	static Cluster cluster;
 	static Session session;

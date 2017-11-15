@@ -20,9 +20,7 @@ import com.att.scld.grm.types.v1.ServiceEndPoint;
 import com.hazelcast.core.HazelcastInstanceNotActiveException;
 import com.hazelcast.core.IMap;
 
-/**
- * TODO add comments here
- */
+
 public class EdgeCache {
 	private static final Logger logger = LoggerFactory.getLogger(EdgeCache.class.getName());
 	private IMap<Object, Object> cacheMap = null;

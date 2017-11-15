@@ -5,8 +5,8 @@ package com.att.ocnp.mgmt.grm_edge_service.topology.domain;
 
 import java.io.Serializable;
 import java.util.List;
-
-import javax.xml.datatype.XMLGregorianCalendar;
+import java.util.Date;
+//import javax.xml.datatype.Date;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.annotation.Transient;
@@ -59,11 +59,11 @@ public class ServiceVersionDefinition  implements Serializable {
     @Column("createdby")
     String createdBy;
     @Column("createdtimestamp")
-    protected XMLGregorianCalendar createdTimestamp;
+    protected Date createdTimestamp;
     @Column("updatedby")
     String updatedBy;
-    @Column("updatedtimestamp ")
-    protected XMLGregorianCalendar updatedTimestamp ;    
+    @Column("updatedtimestamp")
+    protected Date updatedTimestamp ;    
     @Column("deletetime")
     protected long deletetime;
     
@@ -163,10 +163,10 @@ public class ServiceVersionDefinition  implements Serializable {
 	public void setCreatedBy(String createdBy) {
 		this.createdBy = createdBy;
 	}
-	public XMLGregorianCalendar getCreatedTimestamp() {
+	public Date getCreatedTimestamp() {
 		return createdTimestamp;
 	}
-	public void setCreatedTimestamp(XMLGregorianCalendar createdTimestamp) {
+	public void setCreatedTimestamp(Date createdTimestamp) {
 		this.createdTimestamp = createdTimestamp;
 	}
 	public String getUpdatedBy() {
@@ -175,10 +175,10 @@ public class ServiceVersionDefinition  implements Serializable {
 	public void setUpdatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
 	}
-	public XMLGregorianCalendar getUpdatedTimestamp() {
+	public Date getUpdatedTimestamp() {
 		return updatedTimestamp;
 	}
-	public void setUpdatedTimestamp(XMLGregorianCalendar updatedTimestamp) {
+	public void setUpdatedTimestamp(Date updatedTimestamp) {
 		this.updatedTimestamp = updatedTimestamp;
 	}
 	public long getDeletedtime() {

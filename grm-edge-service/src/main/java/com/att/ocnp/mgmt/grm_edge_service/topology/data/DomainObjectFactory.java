@@ -5,6 +5,7 @@ package com.att.ocnp.mgmt.grm_edge_service.topology.data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 import com.att.ocnp.mgmt.grm_edge_service.topology.domain.ServiceEndPoint;
 import com.att.ocnp.mgmt.grm_edge_service.util.GRMEdgeUtil;
@@ -38,8 +39,14 @@ public class DomainObjectFactory {
         sepExt.setListenPort(sep.getListenPort());
         sepExt.setLatitude(sep.getLatitude());
         sepExt.setLongitude(sep.getLongitude());
-        sepExt.setRegistrationTime(sep.getRegistrationTime());
-        sepExt.setExpirationTime(sep.getExpirationTime());
+        if (sep.getRegistrationTime()!=null)
+        {
+        sepExt.setRegistrationTime(sep.getRegistrationTime().toGregorianCalendar().getTime()); 
+        }
+        if (sep.getExpirationTime()!=null)
+        {
+       sepExt.setExpirationTime(sep.getExpirationTime().toGregorianCalendar().getTime()); 
+        }
         sepExt.setContextPath(sep.getContextPath());
         sepExt.setRouteOffer(sep.getRouteOffer());
         sepExt.setStatus(sep.getStatusInfo().getStatus());
@@ -48,7 +55,9 @@ public class DomainObjectFactory {
         if (sep.getEventStatusInfo() != null) {
 	        sepExt.setEventCheckStatus(sep.getEventStatusInfo().getStatus());
 	        sepExt.setEventCheckStatusCode(sep.getEventStatusInfo().getStatusReasonCode());
-	        sepExt.setEventcheckTime(sep.getEventStatusInfo().getStatusCheckTime());
+	        if( sep.getEventStatusInfo().getStatusCheckTime()!=null){
+	        sepExt.setEventcheckTime(sep.getEventStatusInfo().getStatusCheckTime().toGregorianCalendar().getTime()); 
+	        }
 	        sepExt.setEventCheckMessage(sep.getEventStatusInfo().getStatusReasonDescription());
         }
         sepExt.setDme2JDBCDatabaseName(sep.getDME2JDBCDatabaseName());
@@ -81,12 +90,12 @@ public class DomainObjectFactory {
 		if (sep.getOperationalInfo() != null){
 			if(sep.getOperationalInfo().getCreatedBy() != null)
 				sepExt.setCreatedBy(sep.getOperationalInfo().getCreatedBy());
-			if(sep.getOperationalInfo().getCreatedTimestamp() != null)
-				sepExt.setCreatedTimestamp(sep.getOperationalInfo().getCreatedTimestamp());
+			if(sep.getOperationalInfo().getCreatedTimestamp() != null && sep.getOperationalInfo().getCreatedTimestamp()!=null)
+				sepExt.setCreatedTimestamp(sep.getOperationalInfo().getCreatedTimestamp().toGregorianCalendar().getTime());
 			if(sep.getOperationalInfo().getUpdatedBy() != null)
 				sepExt.setUpdatedBy(sep.getOperationalInfo().getUpdatedBy());
-			if(sep.getOperationalInfo().getUpdatedTimestamp() != null)
-				sepExt.setUpdatedTimestamp(sep.getOperationalInfo().getUpdatedTimestamp());
+			if(sep.getOperationalInfo().getUpdatedTimestamp() != null) 
+				sepExt.setUpdatedTimestamp(sep.getOperationalInfo().getUpdatedTimestamp().toGregorianCalendar().getTime()); 
 		}
 		
         return sepExt;

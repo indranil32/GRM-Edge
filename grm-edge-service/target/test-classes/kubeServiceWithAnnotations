@@ -1,0 +1,35 @@
+{  
+   "kind":"Service",
+   "apiVersion":"v1",
+   "metadata":{  
+      "name":"<SERVICE_NAME>",
+      "namespace":"<NAMESPACE>",
+      "creationTimestamp":null,
+	  "annotations":{
+	     "property1":"value1",
+		 "property2":"value2"
+	  }
+   },
+   "spec":{  
+      "ports":[  
+         {  
+         	"name":"<PORT_NAME>",
+            "protocol":"TCP",
+            "port":80,
+            "targetPort":8080
+         }
+      ],
+      "selector":{  
+         "app":"<APP_NAME>",
+         "version":"1.0.0",
+		 "routeoffer":"<ROUTE_OFFER>"
+      },
+      "type":"LoadBalancer",
+      "sessionAffinity":"None"
+   },
+   "status":{  
+      "loadBalancer":{  
+
+      }
+   }
+}

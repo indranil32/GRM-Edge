@@ -45,6 +45,6 @@ public class JerseyConfiguration extends ResourceConfig {
         register(TransactionIdResponseFilter.class, 6001);
         register(DateTimeParamConverterProvider.class);
         register(lrf, 6002);
-      //  register(new EdgeLoggingFilter(log, true));
+     
     }
 }

@@ -37,14 +37,19 @@ public class CassandraConfiguration {
 	@Bean
 	public CassandraClusterFactoryBean cluster() {
 		CassandraClusterFactoryBean cluster = new CassandraClusterFactoryBean();
-		cluster.setContactPoints((System.getProperty(CONTACTPOINTS) != null) ? System.getProperty(CONTACTPOINTS)
+/*		cluster.setContactPoints((System.getProperty(CONTACTPOINTS) != null) ? System.getProperty(CONTACTPOINTS)
 				: environment.getProperty(CONTACTPOINTS));
 		cluster.setPort(Integer.parseInt(
 				(System.getProperty(PORT) != null) ? System.getProperty(PORT) : environment.getProperty(PORT)));
 		cluster.setUsername((System.getProperty(USERNAME) != null) ? System.getProperty(USERNAME)
 				: environment.getProperty(USERNAME));
 		cluster.setPassword((System.getProperty(PASSWORD) != null) ? System.getProperty(PASSWORD)
-				: environment.getProperty(PASSWORD));
+				: environment.getProperty(PASSWORD));*/
+		
+		cluster.setContactPoints("your_host_name"); //cassandra host_name
+		cluster.setPort(9042); //default port for cassandra 
+		cluster.setUsername("xyz"); //your cluster uname
+		cluster.setPassword("xyz"); //your cluster password
 		return cluster;
 	}
 
@@ -62,10 +67,11 @@ public class CassandraConfiguration {
 	public CassandraSessionFactoryBean session() throws Exception {
 		CassandraSessionFactoryBean cassandraSessionFactoryBean = new CassandraSessionFactoryBean();
 		cassandraSessionFactoryBean.setCluster(cluster().getObject());
-		cassandraSessionFactoryBean.setKeyspaceName((System.getProperty(KEYSPACE) != null)
-				? System.getProperty(KEYSPACE) : environment.getProperty(KEYSPACE));
+		/*cassandraSessionFactoryBean.setKeyspaceName((System.getProperty(KEYSPACE) != null)
+				? System.getProperty(KEYSPACE) : environment.getProperty(KEYSPACE));*/
 		cassandraSessionFactoryBean.setConverter(converter());
 		cassandraSessionFactoryBean.setSchemaAction(SchemaAction.NONE);
+		cassandraSessionFactoryBean.setKeyspaceName("topology");
 		return cassandraSessionFactoryBean;
 	}
 

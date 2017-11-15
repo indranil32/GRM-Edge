@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: grmedge
-        image: 
+        image: index.docker.io/accatt123/test5:latest
         imagePullPolicy: Always
         lifecycle:
           preStop:

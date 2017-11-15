@@ -23,6 +23,7 @@ import com.att.ocnp.mgmt.grm_edge_service.businessprocess.EdgeGRMHelper;
 import com.att.ocnp.mgmt.grm_edge_service.businessprocess.K8ServiceController;
 import com.att.ocnp.mgmt.grm_edge_service.cache.ServiceRegistry;
 import com.att.ocnp.mgmt.grm_edge_service.topology.data.DataAccessManager;
+import com.att.ocnp.mgmt.grm_edge_service.topology.data.DbManager;
 import com.att.ocnp.mgmt.grm_edge_service.types.K8Service;
 import com.att.ocnp.mgmt.grm_edge_service.types.KubePod;
 import com.att.ocnp.mgmt.grm_edge_service.util.GRMEdgeConstants;
@@ -345,13 +346,13 @@ public class EdgeServiceImpl implements EdgeService {
 		retSep.setDME2JDBCHealthCheckPassword(sep.getDme2JDBCHealthCheckPassword());
 		retSep.setDME2JDBCHealthCheckUser(sep.getDme2JDBCHealthCheckUser());
 		retSep.setDME2Version(sep.getDme2Version());
-		retSep.setExpirationTime(sep.getExpirationTime());
+//		retSep.setExpirationTime(sep.getExpirationTime()); //sripad to do
 		retSep.setHostAddress(sep.getHostAddress());
 		retSep.setLatitude(sep.getLatitude());
 		retSep.setLongitude(sep.getLongitude());
 		retSep.setListenPort(sep.getListenPort());
 		retSep.setProtocol(sep.getProtocol());
-		retSep.setRegistrationTime(sep.getRegistrationTime());
+//		retSep.setRegistrationTime(sep.getRegistrationTime()); // sripad to do
 		retSep.setRouteOffer(sep.getRouteOffer());
 		StatusInfo si = new StatusInfo();
 		si.setStatus(sep.getStatus());
@@ -363,12 +364,37 @@ public class EdgeServiceImpl implements EdgeService {
 		retSep.setVersion(vd);
 		OperationalInfo oi = new OperationalInfo();
 		oi.setUpdatedBy(sep.getUpdatedBy());
-		oi.setUpdatedTimestamp(sep.getUpdatedTimestamp());
+//		oi.setUpdatedTimestamp(sep.getUpdatedTimestamp()); //sripad to do 
 		oi.setCreatedBy(sep.getCreatedBy());
-		oi.setCreatedTimestamp(sep.getCreatedTimestamp());
+//		oi.setCreatedTimestamp(sep.getCreatedTimestamp()); //sripad to do
 		retSep.setOperationalInfo(oi);
 		return retSep;
 	}
 
+	private DbManager dbManager = null; 
+	
+	public EdgeServiceImpl() {
+		dbManager = DbManager.getInstance();
+	}
+	
+	public String dummy(){
+		
+		com.att.ocnp.mgmt.grm_edge_service.topology.domain.ServiceEndPoint sepExt=new com.att.ocnp.mgmt.grm_edge_service.topology.domain.ServiceEndPoint();
+		sepExt.setHostAddress("ip-172-20-45-127.us-east-2.compute.internal");
+		sepExt.setLatitude("1");
+		sepExt.setLongitude("1");
+		sepExt.setListenPort("dummy");
+		sepExt.setServiceEndPointId("Primary key testing");
+		try{
+			dbManager.addServiceEndPoint(sepExt);
+		}
+		catch(Exception e)
+		{
+			System.out.println("Error"+e);
+		}
+		// TODO Auto-generated method stub
+		return "test";
+		
+	}
 	
 }

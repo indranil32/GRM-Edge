@@ -3,8 +3,7 @@
  *******************************************************************************/
 package com.att.ocnp.mgmt.grm_edge_service;
 
-import com.att.aft.config.ErrorCatalog;
-import com.att.aft.config.ErrorContext;
+
 
 public class EdgeException extends RuntimeException {
 
@@ -17,8 +16,8 @@ public class EdgeException extends RuntimeException {
 	/** The msg. */
 	private String msg = null;
 
-	public EdgeException(String code, ErrorContext context, Throwable t) { this(code, ErrorCatalog.getInstance().getErrorMessage(code, context), t); }
-	public EdgeException(String code, ErrorContext context) { this(code, ErrorCatalog.getInstance().getErrorMessage(code, context)); }
+	/*public EdgeException(String code, ErrorContext context, Throwable t) { this(code, ErrorCatalog.getInstance().getErrorMessage(code, context), t); }*/
+/*	public EdgeException(String code, ErrorContext context) { this(code, ErrorCatalog.getInstance().getErrorMessage(code, context)); }*/
 	/**
 	 * Instantiates a new e http exception.
 	 * 

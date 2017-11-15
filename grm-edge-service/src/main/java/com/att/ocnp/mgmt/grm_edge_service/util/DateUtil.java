@@ -9,7 +9,7 @@ import java.util.GregorianCalendar;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import com.att.aft.config.ErrorContext;
+
 import com.att.ocnp.mgmt.grm_edge_service.EdgeException;
 
 public class DateUtil {
@@ -39,7 +39,8 @@ public class DateUtil {
             XMLGregorianCalendar xmlCal = dtFactory.newXMLGregorianCalendar(cal);
             return xmlCal;
         } catch (Exception e) {
-			throw new EdgeException(GRMEdgeConstants.INTERNAL_ERROR, new ErrorContext().add("message", GRMEdgeConstants.AFT_EDGE_INTERNAL_ERROR));	
+		//	throw new EdgeException(GRMEdgeConstants.INTERNAL_ERROR, new ErrorContext().add("message", GRMEdgeConstants.AFT_EDGE_INTERNAL_ERROR));	
+			throw new EdgeException(GRMEdgeConstants.INTERNAL_ERROR,GRMEdgeConstants.AFT_EDGE_INTERNAL_ERROR);
         }
     }
 
@@ -54,7 +55,8 @@ public class DateUtil {
             XMLGregorianCalendar xmlCal = dtFactory.newXMLGregorianCalendar(cal);
             return xmlCal;
         } catch (Exception e) {
-            throw new EdgeException(GRMEdgeConstants.INTERNAL_ERROR, new ErrorContext().add("message","Error Converting Date Type"));
+          //  throw new EdgeException(GRMEdgeConstants.INTERNAL_ERROR, new ErrorContext().add("message","Error Converting Date Type"));
+            throw new EdgeException(GRMEdgeConstants.INTERNAL_ERROR,GRMEdgeConstants.AFT_EDGE_INTERNAL_ERROR);
         }
     }
     

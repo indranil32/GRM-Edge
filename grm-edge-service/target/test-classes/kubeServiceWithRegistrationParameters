@@ -1,0 +1,44 @@
+{  
+   "kind":"Service",
+   "apiVersion":"v1",
+   "metadata":{  
+      "annotations":{
+	     "DME2Version":"2.5.1",
+	     "DME2JDBCDatabaseName":"Test-Database",
+         "DME2JDBCHealthCheckDriver":"Oracle",
+         "DME2JDBCHealthCheckPassword":"TestPass",
+         "DME2JDBCHealthCheckUser":"TestUser",
+         "clientSupportedVersions":"1,2"		  
+	  },
+	  "name":"<SERVICE_NAME>",
+      "namespace":"<NAMESPACE>",
+      "creationTimestamp":null
+   },
+   "spec":{  
+      "ports":[  
+         {  
+         	"name":"<PORT_NAME>",
+            "protocol":"TCP",
+            "port":80,
+            "targetPort":8080
+         }
+      ],
+      "selector":{  
+         "app":"<APP_NAME>",
+         "version":"1.0.0",
+		 "routeoffer":"<ROUTE_OFFER>"
+      },
+      "type":"LoadBalancer",
+      "sessionAffinity":"None"
+   },
+   "status":{  
+      "loadBalancer":{  
+
+      }
+   }
+}
+
+
+
+
+

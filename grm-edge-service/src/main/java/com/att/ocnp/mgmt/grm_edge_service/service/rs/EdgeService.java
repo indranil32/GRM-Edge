@@ -121,4 +121,9 @@ public interface EdgeService {
 	response = String.class
 			)
 	public String delete(final String requestBodyJSON);
+	
+	@GET
+	@Path("/test")
+	@Produces("text/plain")
+	public String dummy();
 }
