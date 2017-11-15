@@ -1,0 +1,217 @@
+apiVersion: v1
+data:
+  linear: '{"min":2,"nodesPerReplica":8}'
+kind: ConfigMap
+metadata:
+  name: grm-edge-autoscaler
+  namespace: com-att-ocnp-mgmt
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grmedge-config
+  namespace: com-att-ocnp-mgmt
+data:
+  grmedgeprops.properties: |
+    GRM_EDGE_REGISTER_ENDPOINTS_WITH_FULL_HOSTNAME=true
+    GRM_EDGE_FINDRUNNING_RETRIEVE_FROM_GRM_REST=true
+    AFT_LATITUDE=1.0
+    AFT_LONGITUDE=1.0
+    CPFRUN_GRMEDGE_GRM_HOST={{ cpfrun_grmedge_grm_host }}
+    CPFRUN_GRMEDGE_GRM_PORT={{ cpfrun_grmedge_grm_port }}
+    CPFRUN_GRMEDGE_GRM_WRITE_BEHIND_ENABLE=false
+    CPFRUN_GRMEDGE_WRITE_BEHIND_DELAY=30
+    CPFRUN_GRMEDGE_LOAD_K8DATA_ON_STARTUP=true
+    CPFRUN_GRMEDGE_DEFAULT_ENV=LAB
+    CPFRUN_GRMEDGE_DEFAULT_ROUTEOFFER=DEFAULT
+    CPFRUN_GRMEDGE_DB_WRITE_BEHIND_ENABLE=true
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grm-edge-cass-persistence-config
+  namespace: com-att-ocnp-mgmt
+data:
+  persistence.xml: |-
+    <?xml version="1.0" encoding="UTF-8" ?>
+    <persistence xmlns="http://java.sun.com/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+    http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+    version="2.0">
+    <persistence-unit name="grm_topology">
+    <class>com.att.ocnp.mgmt.grm_edge_service.topology.domain.ServiceEndPoint</class>
+    <class>com.att.ocnp.mgmt.grm_edge_service.topology.domain.ServiceDefinition</class>
+    <class>com.att.ocnp.mgmt.grm_edge_service.topology.domain.ServiceVersionDefinition</class>
+    <properties>
+    <property name="Host" value="your_cassandra_instance" />
+    <property name="Port" value="9042" />
+    <property name="Cluster" value="Cluster_name" />
+    <property name="Keyspace" value="topology" />
+    <property name="Username" value="username" />
+    <property name="Password" value="password" />
+    <property name="ReadConsistency" value="ONE" />
+    <property name="WriteConsistency" value="QUORUM" />
+    <property name="ForceColumnFamilyCreation" value="true" />
+    <property name="DisableJMX" value="false" />
+    <property name="DisableMetrics" value="false" />
+    <property name="SSLEnabled" value="false" />
+    <property name="keyspaceAutoCreateEnabled" value="true"/>
+    <property name="thiftApiClientPort" value="9160"/>
+    <property name="LoadBalancingPolicy" value="ROUND_ROBIN"/>
+    </properties>
+    </persistence-unit>
+    </persistence>
+---
+apiVersion: v1
+data:
+  grmedgelogging.properties: |
+    logging.level.com.att.ocnp.mgmt=INFO
+kind: ConfigMap
+metadata:
+  name: grmedgelogging
+  namespace: com-att-ocnp-mgmt
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: grm-edge
+  namespace: com-att-ocnp-mgmt
+spec:
+  replicas: 1
+  selector:
+   matchLabels:
+    app: grm-edge
+  minReadySeconds: 30
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      annotations:
+        pod.beta.kubernetes.io/init-containers: '[{"name":"info","image":"index.docker.io/ad681s/cluster-info:latest","command":["/bin/sh","/config.sh"],"resources":{},"volumeMounts":[{"name":"ocnp-cluster-info","mountPath":"/ocnp-cluster-info"}],"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","imagePullPolicy":"IfNotPresent"}]'
+      labels:
+        app: grm-edge
+    spec:
+      containers:
+      - name: grm-edge
+        resources:
+          limits:
+            cpu: 1500m
+            memory: 1536Mi
+          requests:
+            cpu: "1"
+            memory: 1Gi
+        image: index.docker.io/your_repo/your_image:latest
+        imagePullPolicy: Always
+        lifecycle:
+          preStop:
+            exec:
+              command:
+                - /bin/bash
+                - /shutdownhook.sh
+        ports:
+        - containerPort: 8080
+          name: grmedge-port
+        - containerPort: 31999
+          name: hazelcast-port
+        env:
+        - name: 
+          valueFrom:
+            configMapKeyRef:
+        volumeMounts:
+        -
+          mountPath: /grmedge-logging-config
+          name: logging
+        -
+          mountPath: /grmedge-config
+          name: config
+        -
+          mountPath: /ocnp-cluster-info
+          name: ocnp-cluster-info
+      volumes:
+      - name: config
+        configMap:
+          name: grmedge-config
+      - name: logging
+        configMap:
+          name: grmedgelogging
+      - emptyDir: {}
+        name: ocnp-cluster-info
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grm-edge
+  namespace: com-att-ocnp-mgmt
+spec:
+  selector:
+    app: grm-edge
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+    name: http
+  - protocol: TCP
+    port: 31999
+    targetPort: 31999
+    name: hazelcast-port
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    addonmanager.kubernetes.io/mode: Reconcile
+    k8s-app: grm-edge
+    kubernetes.io/cluster-service: "true"
+  name: grm-edge-autoscaler
+  namespace: com-att-ocnp-mgmt
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: grm-edge-autoscaler
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        scheduler.alpha.kubernetes.io/critical-pod: ""
+        scheduler.alpha.kubernetes.io/tolerations: '[{"key":"CriticalAddonsOnly",
+          "operator":"Exists"}]'
+      creationTimestamp: null
+      labels:
+        k8s-app: grm-edge-autoscaler
+    spec:
+      containers:
+      - command:
+        - /cluster-proportional-autoscaler
+        - --namespace=com-att-ocnp-mgmt
+        - --configmap=grm-edge-autoscaler
+        - --target=Deployment/grm-edge
+        - --default-params={"linear":{"nodesPerReplica":8,"min":2}}
+        - --logtostderr=true
+        - --v=2
+        image: index.docker.io/ad681s/cluster-proportional-autoscaler-amd64:latest
+        imagePullPolicy: IfNotPresent
+        name: autoscaler
+        resources:
+          requests:
+            cpu: 20m
+            memory: 10Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

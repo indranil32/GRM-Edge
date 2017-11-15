@@ -35,7 +35,7 @@
 
 	<groupId>com.att.ocnp.mgmt</groupId>
 	<artifactId>grm-edge-service</artifactId>
-	<version>1.1.18</version>
+	<version>1.1.18-oss</version>
 	<name>grm-edge-service</name>
 	<url>https://github.com/att/GRM-Edge/wiki</url>
 
@@ -45,11 +45,18 @@
 		<version>6.1.0.4-oss</version>
 	</parent>
 
-<scm>
+    <scm>
 		<connection>https://github.com/att/GRM-Edge.git</connection>
 		<developerConnection>${project.scm.connection}</developerConnection>
 		<url>https://github.com/att/GRM-Edge</url>
 	</scm>
+	
+	
+	<developers>
+		<developer>
+			<name>Chad Jordan</name>
+		</developer>
+	</developers>
 	
 	 <distributionManagement>
     		<snapshotRepository>
@@ -75,12 +82,6 @@
 		<sdk.java.rest>6.2.0.4-oss</sdk.java.rest>
 		
 	</properties>
-
-	<developers>
-		<developer>
-			<id>ATT</id>
-		</developer>
-	</developers>
 
 	<dependencies>
 		<dependency>
