@@ -1143,7 +1143,7 @@ public class GRMEdgeTestUtil {
 		vd.setPatch("0");
 		sep.setVersion(vd);
 		sep.setRouteOffer("TEST");
-		sep.setProtocol("http"); //TODO
+		sep.setProtocol("http"); //TODO --sr
 		sep.setName(GRMEdgeTestConstants.SYNC_TEST_CASE_NAME);
 		update.setEnv("LAB");
 		update.setServiceEndPoint(sep);
