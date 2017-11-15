@@ -4,6 +4,7 @@ GRMEdge is a Kubernetes pod and service that runs under the com-att-ocnp-mgmt na
     REQUIREMENTS:
     
     Environment:
+    
    • Linux
    
       Software:
