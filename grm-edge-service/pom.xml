@@ -50,6 +50,13 @@
 		<developerConnection>${project.scm.connection}</developerConnection>
 		<url>https://github.com/att/GRM-Edge</url>
 	</scm>
+
+	 <licenses>
+		<license>
+		<name>BSD License</name>
+		<url> </url>
+		</license>
+     </licenses>
 	
 	
 	<developers>
