@@ -1,17 +1,21 @@
-Overview:
-     GRMEdge is a Kubernetes pod and service that runs under the com-att-ocnp-mgmt namespace. GRMEdge listens to the cluster's Kubernetes API server and creates a ServiceEndPoint cache from it. If there is connectivity to GRM, GRMEdge posts and returns endpoints to and from GRM. Otherwise, it will serve only from its cache. Applications can query GRMEdge for service endpoints by sending a FindRunningServiceEndPointRequest to <grm-edge-ip>:<grm-edge-port>/GRMLWPService/v1/serviceEndPoint/findRunning. 
-REQUIREMENTS:
-     Environment:
-•	Linux
-    Software:
+    Overview:
+GRMEdge is a Kubernetes pod and service that runs under the com-att-ocnp-mgmt namespace. GRMEdge listens to the cluster's Kubernetes API server and creates a ServiceEndPoint cache from it. If there is connectivity to GRM, GRMEdge posts and returns endpoints to and from GRM. Otherwise, it will serve only from its cache. Applications can query GRMEdge for service endpoints by sending a FindRunningServiceEndPointRequest to <grm-edge-ip>:<grm-edge-port>/GRMLWPService/v1/serviceEndPoint/findRunning. 
+     
+    REQUIREMENTS:
+    Environment:
+   • Linux
+   
+      Software:
 •	Maven 3.x.x
 •	Java 8
 •	Cassandra
-    ¬Other:
+
+    Other:
 •	Kubernetes running on instance ( e.g., AWS ).
 •	Kubernetes namespace
 •	Docker 
-   Build:
+
+    Build:
 1.	Install and configure Java and Maven on your local machine. Many robust installation guides exist for both products and there is not a need for an additional guide here.
 2.	Clone GRM-Edge repository.
 3.	Install and configure CASSANDRA in your local. Run script service_topology_schema.cql.
