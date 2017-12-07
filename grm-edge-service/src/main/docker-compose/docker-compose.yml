@@ -1,7 +1,7 @@
 version: '2'
 services:
   grm_container:
-    image: ad681s/grm-updated
+    image: your_service_dock_image
     ports:
       - "8080:8080"
       - "31999:31999"
